@@ -31,10 +31,11 @@ function App(props) {
             throw new Error(`Fetching movies failed. Something went wrong...!! ${`....Retrying`}`)
         }
           const data = await response.json();
-          console.log(data);
-
+          console.log('getting data',data);
+          
           const loadedMovies = []; //initially empty arrray
           for(const key in data){
+            console.log('key',key)
             loadedMovies.push({ 
               id: key,
               title: data[key].title,
@@ -44,7 +45,7 @@ function App(props) {
          
           }
           setMovies(loadedMovies);
-          
+          // console.log('after loaded',data.id)
         
         }          
         catch(error) {
@@ -75,6 +76,8 @@ function App(props) {
       const data = await response.json();
       console.log(data);
     }
+
+ 
   return (
     <React.Fragment>
       <section>

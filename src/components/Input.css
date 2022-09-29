@@ -5,11 +5,15 @@
 
 .input-form input{
 
-    width: 70vw;
+    width: 75%;
     height: 30px;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+.input-form textarea{
+    width: 75%;
+    /* height: 30px; */
 }
 
 .input-form label{

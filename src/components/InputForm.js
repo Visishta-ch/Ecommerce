@@ -24,7 +24,7 @@ const InputForm = (props) => {
         <br/>
         <label htmlFor='opening-text'>Opening Text</label> 
         <br></br>
-        <textarea type="text" style={{rows:'5',width:'70vw',height:'70px',border:'1px solid #ccc',borderRadius:'5px'}}  id='opening-text' ref={openTextRef}></textarea>
+        <textarea type="text" rows='5' style={{border:'1px solid #ccc',borderRadius:'5px'}}  id='opening-text' ref={openTextRef}></textarea>
         <br/>
         <label htmlFor='date'>Release Date</label> 
         <br></br>
