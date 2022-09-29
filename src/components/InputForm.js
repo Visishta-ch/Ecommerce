@@ -1,41 +1,39 @@
-import React,{useState} from 'react'
+import React,{useRef} from 'react'
 import './Input.css'
 const InputForm = (props) => {
-    const [title,setTitle] = useState('');
-    const [description, setDescription] = useState();
+   const titleRef = useRef('');
+   const openTextRef = useRef('');
+   const dateRef = useRef('');
 
-    const changeInput =(e)=> {
-        var input = e.target.value;    
-        setTitle(input);
-    }
-    const changeDes =(e)=> {
-        var desc = e.target.value;
-        setDescription(desc);
-    }
+    function saveInput(e){
+        e.preventDefault();
 
-    const getInputDataHandler = (e) => {
-        // setTitle(title);
-        console.log(title,description);
-        console.log(  document.getElementById('date').value)
-        setTitle('' );
-        setDescription('')
-        
+        const newMovie = {
+            title : titleRef.current.value,
+            openingText : openTextRef.current.value,
+            releaseDate : dateRef.current.value
+        }
+        props.onAddMovie(newMovie);
     }
-  return (
+   return (
     <div className="input-form" >
-        <label>Title</label> 
+    <form onSubmit={saveInput}>
+        <label htmlFor='title'>Title</label> 
         <br></br>
-        <input type="text" value={title} onChange={changeInput}></input>
+        <input type="text" id='title' ref={titleRef}></input>
         <br/>
-        <label>Opening Text</label> 
+        <label htmlFor='opening-text'>Opening Text</label> 
         <br></br>
-        <input type="text" style={{height:'50px'}} value ={description} onChange={changeDes} ></input>
+        <textarea type="text" style={{rows:'5',width:'70vw',height:'70px',border:'1px solid #ccc',borderRadius:'5px'}}  id='opening-text' ref={openTextRef}></textarea>
         <br/>
-        <label>Release Date</label> 
+        <label htmlFor='date'>Release Date</label> 
         <br></br>
-        <input type="date" id='date'></input>
+        <input type="date" id='date' ref={dateRef}></input>
 
-    <button style={{marginTop:'1.5rem', marginLeft:'12.2rem'}} onClick={getInputDataHandler}>Add Movie to list</button>
+    <button style={{marginTop:'1.5rem', marginLeft:'12.2rem'}}>Add Movie to list</button>
+
+    </form>
+
     </div>
   )
 }
