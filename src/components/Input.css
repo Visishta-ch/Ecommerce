@@ -1,0 +1,19 @@
+.input-form{
+    /* display:block; */
+    text-align:left;
+}
+
+.input-form input{
+
+    width: 70vw;
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.input-form label{
+    font-size:24px;
+    font-family: 'Times New Roman', Times, serif;
+    
+}

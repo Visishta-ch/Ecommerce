@@ -1,19 +1,26 @@
 import React,{useState,useEffect, useCallback} from 'react';
-
+import InputForm from './components/InputForm'
 import MoviesList from './components/MoviesList';
 import './App.css';
 
 function App(props) {
-  // const [retry, setRetry] = useState(false);
+  const [retry, setRetry] = useState(false);
   const [movies, setMovies] = useState([])
   const [isloading, setisLoading] = useState(false);
-  const [error, setError] = useState(null)
-   
+  const [error, setError] = useState(null)  
+   useEffect(()=> {
+    if(retry === true){
+      var intervalId = setInterval(fetchMovieshandler,5000);
+    }else{
+      clearInterval(intervalId); 
+    }
+    return ()=> clearInterval(intervalId);
+   },[retry])
   useEffect(() => {
     fetchMovieshandler()
   },[])
 
-  var intervalId;
+
   const fetchMovieshandler = useCallback( async () => {
       setisLoading(true)
       setError(null);
@@ -40,31 +47,7 @@ function App(props) {
         }          
         catch(error) {
           setError(error.message);
-          
-        //  intervalId =   setInterval(async () => {
-        //       console.log(intervalId);
-        //       console.log('set interval active')
-        //       // if(retry === true){
-        //       //     console.log('retry active', retry)
-        //       //     // stopRetrying();
-        //       //     stopRetrying(intervalId);
-        //       //     setRetry(true);
-        //       //     clearInterval(intervalId);
-        //       //   }
-        //   if(stopRetrying)
-        //       console.log(stopRetrying);
-        //       stopRetrying();
-               
-        //   },2000)
-        //   // if(stopRetrying){
-        //   //   console.log('have not stopped retrying')
-        //   // }
-        //   // else{
-        //   //   console.log('clearing id', intervalId)
-        //   //   clearInterval(intervalId);
-        //   // }   
-     
-       
+          setRetry(true);
         }
       setisLoading(false);
 
@@ -72,17 +55,19 @@ function App(props) {
 
  
 
-  function stopRetrying() {
-      console.log("trying to clear set interval",intervalId)
-  
-      clearInterval(props.intervalId);
-      setError(null);
-      setisLoading(false);
-      // alert('stopped retrying')
+  const stopRetrying=()=> {
+    setRetry(false);
+    setError(null);
+    setisLoading(false);
+    console.log("Back to home");
+     
   }
 
   return (
     <React.Fragment>
+      <section>
+        <InputForm/>
+      </section>
       <section>
         <button onClick={fetchMovieshandler}>Fetch Movies</button>
       </section>
