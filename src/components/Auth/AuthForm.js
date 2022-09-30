@@ -1,8 +1,10 @@
 import { useState,useRef, useContext } from 'react';
 import AuthContext from '../../store/authContext';
 import classes from './AuthForm.module.css';
-
+import ProfileForm from '../Profile/ProfileForm'
+import {useHistory} from 'react-router-dom';
 const AuthForm = () => {
+  const history = useHistory();
   const [loading,setLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const emailRef = useRef();
@@ -38,10 +40,12 @@ const AuthForm = () => {
         
         if(res.ok){
           // console.log('token',res)
+          history.replace('/profile');
           return res.json().then((data)=>{
             console.log('successfully store', data.idToken);
             authCtx.login(data.idToken)
           });
+          
         }else{
           return res.json().then((data)=>{
             //error message
@@ -70,7 +74,7 @@ const AuthForm = () => {
       }).then(res => {
           setLoading(false);
           if(res.ok){
-
+          
           }else{
             return res.json().then((data) => {
               //error modal

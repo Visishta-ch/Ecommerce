@@ -1,8 +1,10 @@
 import classes from './ProfileForm.module.css';
 import {useRef,useContext} from 'react'
 import AuthContext from '../../store/authContext';
+import {useHistory} from 'react-router-dom';
 
 const ProfileForm = () => {
+  const history = useHistory()
   const authCtx = useContext(AuthContext);
   const newPswref = useRef();
 
@@ -24,6 +26,7 @@ const ProfileForm = () => {
       }).then((res) => {
           if(res.ok){
              console.log('password updated successfully')
+             history.replace('/')
           }
           else{
             return res.json().then((data)=>{
